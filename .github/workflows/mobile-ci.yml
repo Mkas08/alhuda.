@@ -1,0 +1,40 @@
+name: Mobile CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'mobile/**'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'mobile/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'mobile/package-lock.json'
+        
+    - name: Install dependencies
+      run: |
+        cd mobile
+        npm install
+        
+    - name: Lint with ESLint
+      run: |
+        cd mobile
+        npm run lint
+        
+    - name: Run tests
+      run: |
+        cd mobile
+        npm test

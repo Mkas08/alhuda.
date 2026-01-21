@@ -15,9 +15,11 @@ app = FastAPI(
     docs_url=f"{settings.API_V1_STR}/docs",
 )
 
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to Al-Huda API", "version": "1.0.0"}
+
 
 @app.get("/health")
 async def health_check():

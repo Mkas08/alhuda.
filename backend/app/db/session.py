@@ -12,7 +12,7 @@ AsyncSessionLocal = sessionmaker(
     engine,
     class_=AsyncSession,
     expire_on_commit=False,
-)
+)  # type: ignore
 
 
 async def get_db():

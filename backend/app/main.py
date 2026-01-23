@@ -1,6 +1,8 @@
 import sentry_sdk
 from fastapi import FastAPI
 from app.core.config import settings
+from app.api.v1.api import api_router
+
 
 if settings.SENTRY_DSN:
     sentry_sdk.init(
@@ -14,6 +16,8 @@ app = FastAPI(
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
     docs_url=f"{settings.API_V1_STR}/docs",
 )
+
+app.include_router(api_router, prefix=settings.API_V1_STR)
 
 
 @app.get("/")

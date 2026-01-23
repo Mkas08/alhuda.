@@ -19,6 +19,11 @@ class Settings(BaseSettings):
     POSTGRES_DB: str
     POSTGRES_PORT: str
 
+    # Security
+    SECRET_KEY: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8  # 8 days
+    REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 30  # 30 days
+
     # Sentry
     SENTRY_DSN: str | None = None
 
@@ -44,4 +49,4 @@ class Settings(BaseSettings):
         env_file = ".env"
 
 
-settings = Settings()
+settings = Settings()  # type: ignore
